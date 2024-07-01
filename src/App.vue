@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-16">
     <SiteNavbar/>
     <router-view/>
   </div>
@@ -9,3 +9,7 @@
   import { ref } from 'vue'
   import SiteNavbar from '@/components/SiteNavbar.vue';
 </script>
+
+<style>
+
+</style>
