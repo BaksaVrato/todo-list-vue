@@ -1,7 +1,11 @@
 <template>
-  <router-view/>
+  <div>
+    <SiteNavbar/>
+    <router-view/>
+  </div>
 </template>
 
-<style>
-
-</style>
+<script setup>
+  import { ref } from 'vue'
+  import SiteNavbar from '@/components/SiteNavbar.vue';
+</script>
