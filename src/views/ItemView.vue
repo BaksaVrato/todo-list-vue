@@ -1,8 +1,9 @@
 <template>
   <div>
-    <p>done item list</p>
+    <p>item view</p>
   </div>
 </template>
 
 <script setup>
+
 </script>
