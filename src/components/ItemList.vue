@@ -1,40 +1,36 @@
 <template>
   <ItemAdder @add-item="addItemToList"/>
   <div v-for="item in itemList" :key="item">
-    <Item :item="item" @remove-item="removeItem"/>
+    <ItemCard :item="item" @remove-item="removeItem"/>
   </div>
 </template>
 
 <script setup>
-  import Item from '@/components/Item.vue'
+  import ItemCard from '@/components/ItemCard.vue'
   import ItemAdder from '@/components/ItemAdder.vue'
   import { ref } from 'vue';
   import { uid } from 'uid';
 
-  const itemList = ref([
-    {
-      id: uid(),
-      text: 'Sample textample textample textample textample textample textample text...',
-      isDone: false
-    },
-    {
-      id: uid(),
-      text: 'Sample textample textample textample textample textample textample text...',
-      isDone: true
-    }
-  ])
+  const itemList = ref([])
+  if(localStorage.getItem('itemList')) {
+    itemList.value = JSON.parse(localStorage.getItem('itemList'));
+  }
 
   const addItemToList = (text) => {
     itemList.value.push({
       id: uid(),
       text: text,
-      isDone: false
+      isDone: false,
+      aditionalInfo: ''
     }) 
     console.log(itemList.value);
+    localStorage.setItem('itemList', JSON.stringify(itemList.value));
+    console.log(localStorage.getItem('itemList'));
     }
 
   const removeItem = (id) => {
     itemList.value = itemList.value.filter(item => item.id !== id)
+    localStorage.setItem('itemList', JSON.stringify(itemList.value));
   }
 
 </script>

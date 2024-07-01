@@ -1,5 +1,5 @@
 <template>
-  <header class="w-full fixed z-10 top-0 shadow-xl">
+  <header class="w-full fixed z-20 top-0 shadow-xl">
     <nav
       class="py-4 px-8 flex flex-row text-xl font-semibold"
     >
