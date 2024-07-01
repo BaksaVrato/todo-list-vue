@@ -27,6 +27,7 @@
       <!-- TODO - vyrolluj aditional text, po pridani je vyrolovane, vies vyrolovat viac naraz -->
   </div>
 
+  <!-- TODO - lepsie pls -->
   <div 
       v-if="item.isDone"
       class="absolute w-[90%] h-1 bg-black bottom-7 z-10 opacity-50 left-1/2 -translate-x-1/2"
