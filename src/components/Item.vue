@@ -4,6 +4,7 @@
     :class="{ 'bg-gray-300': item.isDone, 'text-gray-500' : item.isDone }"
   >
     <p class="flex flex-1 text-lg font-semibold">{{ item.text }}</p>
+
     <div 
       class="flex gap-2 text-xl v-if"
     >
@@ -16,12 +17,24 @@
         class="fa-regular fa-circle-check hover:cursor-pointer"
         @click="itemDone"
       ></i>
+      <i 
+        class="fa-solid fa-eye hover:cursor-pointer"
+        @click="viewItem"
+      ></i>
     </div>
 </div>
 </template>
 
 <script setup>
   import { defineProps, ref } from 'vue'
+
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter();
+
+  const viewItem = () => {
+    router.push({ name: 'item', params: { id: props.item.id }});
+  }
 
   const props = defineProps({
     item: {
