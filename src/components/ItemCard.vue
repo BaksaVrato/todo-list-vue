@@ -1,49 +1,62 @@
 <template>
-<div class="relative">
+<div 
+  class="relative"
+  :class="{'opacity-0 duration-300': removed}"
+  >
   <div
-    class="flex items-center p-4 rounded gap-4 bg-gray-100 mb-3"
-    :class="{ 'bg-gray-300 duration-1000': item.isDone, 'text-gray-500' : item.isDone , 'opacity-0 duration-300': removed}"
+    class="flex items-center p-4 rounded-t gap-4 bg-gray-100"
+    :class="{ 'bg-gray-300 duration-1000': item.isDone, 'text-gray-500' : item.isDone , 'mb-3 rounded-b': !isRolled }"
   >
     <p class="flex flex-1 text-lg font-semibold">{{ item.text }}</p>
 
     <div 
-      class="flex gap-2 text-xl"
+      class="flex gap-2 text-xl items-center"
     >
       <i 
         class="fa-regular fa-trash-can hover:cursor-pointer"
         @click="removeItem"
-      >del</i>
+      ></i>
       <i 
         v-if="!item.isDone" 
         class="fa-regular fa-circle-check hover:cursor-pointer"
         @click="itemDone"
-      >done</i>
+      ></i>
       <i 
         class="fa-solid fa-eye hover:cursor-pointer"
         @click="viewItem"
-      >view</i>
+      ></i>
       <i
-        class="hover:cursor-pointer"
+        class="hover:cursor-pointer fa-solid fa-caret-down"
         @click="rollItem"
-      > <!-- add icon -->
-        roll
+        v-if="!item.isDone" 
+      >
       </i>
     </div>
-
-    <div
+  </div>
+  <div
       v-if="isRolled"
+      class="flex flex-col p-4 rounded-b bg-gray-50 mb-3 text-sm"
     >
-      <p>asdasdasda asd asd asd asd asd</p>
-  </div>
 
+<!-- TODO saving to localStorage -->
+
+      <p>Aditional notes:</p>
+      <p v-if="!isEditing">{{ item.aditionalInfo }}</p>
+      <input 
+        type="text" 
+        placeholder="Additional notes" 
+        class="bg-white"
+        v-model="item.aditionalInfo"
+        v-else
+      />
+      <i @click="toggleEdit" class="fa-solid fa-pen-to-square hover:cursor-pointer"></i>
   </div>
-  
 </div>
 
 </template>
 
 <script setup>
-  import { defineProps, ref } from 'vue'
+import { defineProps, ref } from 'vue'
 
   import { useRouter } from 'vue-router';
 
@@ -86,6 +99,11 @@
   const isRolled = ref(false);
   const rollItem = () => {
     isRolled.value = !isRolled.value;
+  }
+
+  const isEditing = ref(false);
+  const toggleEdit = () => {
+    isEditing.value = !isEditing.value;
   }
 
 </script>

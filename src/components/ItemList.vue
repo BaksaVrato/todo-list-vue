@@ -21,7 +21,7 @@
       id: uid(),
       text: text,
       isDone: false,
-      aditionalInfo: ''
+      aditionalInfo: 'sadasd'
     }) 
     console.log(itemList.value);
     localStorage.setItem('itemList', JSON.stringify(itemList.value));
