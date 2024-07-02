@@ -2,38 +2,42 @@
 <div class="relative">
   <div
     class="flex items-center p-4 rounded gap-4 bg-gray-100 mb-3"
-    :class="{ 'bg-gray-300': item.isDone, 'text-gray-500' : item.isDone}"
+    :class="{ 'bg-gray-300 duration-1000': item.isDone, 'text-gray-500' : item.isDone , 'opacity-0 duration-300': removed}"
   >
     <p class="flex flex-1 text-lg font-semibold">{{ item.text }}</p>
 
     <div 
-      class="flex gap-2 text-xl v-if"
+      class="flex gap-2 text-xl"
     >
       <i 
         class="fa-regular fa-trash-can hover:cursor-pointer"
         @click="removeItem"
-      ></i>
+      >del</i>
       <i 
         v-if="!item.isDone" 
         class="fa-regular fa-circle-check hover:cursor-pointer"
         @click="itemDone"
-      ></i>
+      >done</i>
       <i 
         class="fa-solid fa-eye hover:cursor-pointer"
         @click="viewItem"
-      ></i>
+      >view</i>
+      <i
+        class="hover:cursor-pointer"
+        @click="rollItem"
+      > <!-- add icon -->
+        roll
+      </i>
     </div>
 
-      <!-- TODO - vyrolluj aditional text, po pridani je vyrolovane, vies vyrolovat viac naraz -->
+    <div
+      v-if="isRolled"
+    >
+      <p>asdasdasda asd asd asd asd asd</p>
   </div>
 
-  <!-- TODO - lepsie pls -->
-  <div 
-      v-if="item.isDone"
-      class="absolute w-[90%] h-1 bg-black bottom-7 z-10 opacity-50 left-1/2 -translate-x-1/2"
-      :class="{'cross' : item.isDone }"
-    >    
   </div>
+  
 </div>
 
 </template>
@@ -58,7 +62,12 @@
 
   const emit = defineEmits(['remove-item']);
 
-  const removeItem = () => {
+  const removed = ref(false);
+  const removeItem = async () => {
+    removed.value = true;
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     emit('remove-item', props.item.id);
   }
 
@@ -74,22 +83,13 @@
     localStorage.setItem('itemList', JSON.stringify(itemList));
   }
 
+  const isRolled = ref(false);
+  const rollItem = () => {
+    isRolled.value = !isRolled.value;
+  }
+
 </script>
 
 <style scoped>
-.cross {
-  animation: cross 1s ease-in-out;
-}
-
-@keyframes cross {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 90%;
-  }
-}
-
-
 
 </style>

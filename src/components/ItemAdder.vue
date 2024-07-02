@@ -6,11 +6,11 @@
     <input 
       type="text" 
       placeholder="Add new item" 
-      class="w-full text-xl bg-gray-300 p-3 "
+      class="w-full text-xl bg-gray-300 p-3"
       v-model="text"
     />
     <button
-      class="w-16 bg-gray-300 hover:bg-gray-400 font-semibold py-2 px-4 rounded shadow"
+      class="w-16 bg-gray-300 hover:bg-gray-400 font-semibold py-2 px-4 rounded shadow duration-200"
       @click="addItem()"
     >
       Add
